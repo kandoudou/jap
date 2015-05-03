@@ -4,8 +4,7 @@ wamp
 LISTE TO DO :
 
 -Base du site internet :
---Créer un belle architecture MVC récente
---Template HTML CSS autres que Boilerplate
+-- architecture MVC
 --Sessions et Cookies
 --Media queries et responsive
 
