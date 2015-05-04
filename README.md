@@ -1,5 +1,6 @@
 # jap
-wamp
+wamp :
+database name : japonais
 
 LISTE TO DO :
 
