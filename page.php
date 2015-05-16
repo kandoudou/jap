@@ -49,9 +49,9 @@ $map->setAPIKey('AIzaSyCNjCLali0Bb5_VqETSmAH884sZT0gy2wE');
 //(4) On ajoute les caractéristiques que l'on désire à notre carte.
 $map->setWidth("400px");
 $map->setHeight("300px");
-$map->setCenterCoords (2.286682,48.877551);
+$map->setCenterCoords ($_ENV['location_long'],$_ENV['location_lat']);
 $map->setZoomLevel (17);
-$map->addMarkerByCoords( 2.286682, 48.877551, $_ENV['name'], "<em>contenu</em> de l'infobulle", $_ENV['name']);
+$map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['name'], "<em>contenu</em> de l'infobulle", $_ENV['name']);
 
 //(5) On applique la base XHTML avec les fonctions à appliquer ainsi que le onload du body.
 ?>
