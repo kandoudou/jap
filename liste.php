@@ -1,23 +1,25 @@
 <?php
-	
-	include('db.php');
+try
+{
+	// On se connecte à MySQL
+	$bdd = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+}
+catch(Exception $e)
+{
+	// En cas d'erreur, on affiche un message et on arrête tout
+        die('Erreur : '.$e->getMessage());
+}
 
+// On récupère tout le contenu de la table jeux_video
+$reponse = $bdd->query('SELECT * FROM `table 1`');
 
-	// SQL query
-	$strSQL = "SELECT * FROM `table 1` ";
+// On affiche chaque entrée une à une
+while ($donnees = $reponse->fetch())
+{
+?>
+<p><?php echo $donnees['name']; ?></p>
+<?php
+}
 
-	// Execute the query (the recordset $rs contains the result)
-	$rs = mysql_query($strSQL);
-
-	// Loop the recordset $rs
-	// Each row will be made into an array ($row) using mysql_fetch_array
-	while($row = mysql_fetch_array($rs)) {
-
-	   // Write the value of the column FirstName (which is now in the array $row)
-	  echo $row['name'] . "<br />";
-
-	  }
-
-	// Close the database connection
-	mysql_close();
+$reponse->closeCursor(); // Termine le traitement de la requête
 ?>

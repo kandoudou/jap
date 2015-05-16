@@ -1,11 +1,3 @@
 <?php
-
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$db = 'japonais';
-	
-	$conn = mysql_connect($host, $user, $pass) or die(mysql_error());
-	mysql_select_db($db, $conn) or die(mysql_error());
-	
+$bdd = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '');
 ?>
