@@ -17,7 +17,8 @@ $reponse = $bdd->query('SELECT * FROM `table 1`');
 while ($donnees = $reponse->fetch())
 {
 ?>
-<p><?php echo $donnees['name']; ?></p>
+<p><a href="http://localhost/jap/jap/page.php?name=<?php echo $donnees['name']; ?>"><?php echo $donnees['name']; ?></a></p>
+<p><?php echo $donnees['address_name']; ?>
 <?php
 }
 
