@@ -13,15 +13,22 @@ catch(Exception $e)
 // Récupère l'id de la page courante passée par l'URL
 // Si non défini, on considère que la page est la page d'accueil
 	if (isset($_GET['name'])) {
-		$enva = $_ENV['name'] = strval($_GET['name']);
+		$enva = $_ENV['name'] = $_GET['departement'].'/'.$_GET['ville'].'/'.$_GET['name'];
 	} else {
 		$_ENV['name'] = $id_page_accueil;
 	}
 
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query("SELECT * FROM `table 1` WHERE `name` ='$enva'");
-// On affiche chaque entrée une à une
+$reponsecount = $bdd->query("SELECT * FROM `table 1` WHERE `name_url`='$enva'");
 
+//Permet de rediriger l'utilisateur sur la page 404 si la page n'existe pas
+if ($reponsecount->fetchColumn() == 0) {
+header('Location:http://'.$_SERVER['HTTP_HOST'].'/jap/jap/404.html');
+}
+
+$reponse = $bdd->query("SELECT * FROM `table 1` WHERE `name_url`='$enva'");
+
+// On affiche lle restaurant
 while ($donnees = $reponse->fetch())
 {
 $_ENV['name'] = $donnees['name'];

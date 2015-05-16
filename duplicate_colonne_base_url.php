@@ -1,3 +1,9 @@
+<?php 
+
+// Cette page permet de dupliquer la colonne name, ville, département dans une nouvelle colonne pour former une nouvelle url 
+
+?>
+<?php include('function.php'); ?>
 <?php
 try
 {
@@ -11,6 +17,7 @@ catch(Exception $e)
 }
 
 // On récupère tout le contenu de la table jeux_video
+$reponse = $bdd->query('ALTER TABLE `table 1` ADD `name_url` VARCHAR( 100 ) NOT NULL');
 $reponse = $bdd->query('SELECT * FROM `table 1`');
 
 // On affiche chaque entrée une à une
@@ -22,11 +29,7 @@ while ($donnees = $reponse->fetch())
 $departement = $donnees['address_postal_code']; 
 $ville = encode($donnees['address_city']); 
 $namerestaurant = encode($donnees['name']);
-?>
-<p><a href="http://localhost/jap/jap/restaurant/<?php echo $departement[0],$departement[1]; ?>/<?php echo $ville; ?>/<?php echo $namerestaurant; ?>.html"><?php echo $donnees['name']; ?></a></p>
-<p><?php echo $donnees['address_name']; ?>
-<?php
-}
 
-$reponse->closeCursor(); // Termine le traitement de la requête
+$bdd->query("update `table 1` set name_url ='".$departement[0].$departement[1].'/'.$ville.'/'.$namerestaurant."'"."WHERE id='".$donnees['id']."'");
+}
 ?>

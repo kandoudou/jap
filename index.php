@@ -171,7 +171,7 @@ function geolocate() {
 	<input type="submit" id="recherche" name="envoi" value="ok"/>
 	</form>
 
-	
+	    <?php include ('function.php');?>
 		<?php include('liste.php');?> 
 		
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
