@@ -11,7 +11,7 @@ catch(Exception $e)
 }
 
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('SELECT * FROM `table 1`');
+$reponse = $bdd->query('SELECT * FROM `table 5`');
 
 // On affiche chaque entrée une à une
 while ($donnees = $reponse->fetch())
@@ -24,7 +24,7 @@ $ville = encode($donnees['address_city']);
 $namerestaurant = encode($donnees['name']);
 ?>
 <p><a href="http://localhost/jap/jap/restaurant/<?php echo $departement[0],$departement[1]; ?>/<?php echo $ville; ?>/<?php echo $namerestaurant; ?>.html"><?php echo $donnees['name']; ?></a></p>
-<p><?php echo $donnees['address_name']; ?>
+<p><?php echo $donnees['address_full']; ?>
 <?php
 }
 

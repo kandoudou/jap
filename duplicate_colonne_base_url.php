@@ -17,8 +17,8 @@ catch(Exception $e)
 }
 
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query('ALTER TABLE `table 1` ADD `name_url` VARCHAR( 100 ) NOT NULL');
-$reponse = $bdd->query('SELECT * FROM `table 1`');
+$reponse = $bdd->query('ALTER TABLE `table 5` ADD `name_url` VARCHAR( 100 ) NOT NULL');
+$reponse = $bdd->query('SELECT * FROM `table 5`');
 
 // On affiche chaque entrée une à une
 while ($donnees = $reponse->fetch())
@@ -30,6 +30,6 @@ $departement = $donnees['address_postal_code'];
 $ville = encode($donnees['address_city']); 
 $namerestaurant = encode($donnees['name']);
 
-$bdd->query("update `table 1` set name_url ='".$departement[0].$departement[1].'/'.$ville.'/'.$namerestaurant."'"."WHERE id='".$donnees['id']."'");
+$bdd->query("update `table 5` set name_url ='".$departement[0].$departement[1].'/'.$ville.'/'.$namerestaurant."'"."WHERE id='".$donnees['id']."'");
 }
 ?>

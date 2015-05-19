@@ -19,14 +19,14 @@ catch(Exception $e)
 	}
 
 // On récupère tout le contenu de la table jeux_video
-$reponsecount = $bdd->query("SELECT * FROM `table 1` WHERE `name_url`='$enva'");
+$reponsecount = $bdd->query("SELECT * FROM `table 5` WHERE `name_url`='$enva'");
 
 //Permet de rediriger l'utilisateur sur la page 404 si la page n'existe pas
 if ($reponsecount->fetchColumn() == 0) {
 header('Location:http://'.$_SERVER['HTTP_HOST'].'/jap/jap/404.html');
 }
 
-$reponse = $bdd->query("SELECT * FROM `table 1` WHERE `name_url`='$enva'");
+$reponse = $bdd->query("SELECT * FROM `table 5` WHERE `name_url`='$enva'");
 
 // On affiche lle restaurant
 while ($donnees = $reponse->fetch())
