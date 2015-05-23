@@ -2,38 +2,33 @@
 include_once 'psl-config.php';
  
 function jap_session_start() {
+    
     $session_name = 'jap_session_id';   // Attribue un nom de session
     $secure = SECURE;
-    // Cette variable empêche Javascript d’accéder à l’id de session
-    $httponly = true;
+    $httponly = true; // Cette variable empêche Javascript d’accéder à l’id de session
+    
     // Force la session à n’utiliser que les cookies
     if (ini_set('session.use_only_cookies', 1) === FALSE) {
         header("Location: ../error.php?err=Could not initiate a safe session (ini_set)");
         exit();
     }
+    
     // Récupère les paramètres actuels de cookies
     $cookieParams = session_get_cookie_params();
-    session_set_cookie_params($cookieParams["lifetime"],
-        $cookieParams["path"], 
-        $cookieParams["domain"], 
-        $secure,
-        $httponly);
-    // Donne à la session le nom configuré plus haut
-    session_name($session_name);
-    session_start();            // Démarre la session PHP 
-    session_regenerate_id();    // Génère une nouvelle session et efface la précédente
+    session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure,$httponly);
+    session_name($session_name);    // Donne à la session le nom configuré plus haut
+    session_start();                // Démarre la session PHP 
+    session_regenerate_id();        // Génère une nouvelle session et efface la précédente
 }
 
 function login($email, $password, $mysqli) {
     // L’utilisation de déclarations empêche les injections SQL
-    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt 
-        FROM members
-       WHERE email = ?
-        LIMIT 1")) {
+    if ($stmt = $mysqli->prepare("SELECT id, username, password, salt FROM members WHERE email = ? LIMIT 1")) {
+            
         $stmt->bind_param('s', $email);  // Lie "$email" aux paramètres.
         $stmt->execute();    // Exécute la déclaration.
         $stmt->store_result();
- 
+            
         // Récupère les variables dans le résultat
         $stmt->bind_result($user_id, $username, $db_password, $salt);
         $stmt->fetch();
@@ -49,8 +44,8 @@ function login($email, $password, $mysqli) {
                 // Envoie un email à l’utilisateur l’informant que son compte est verrouillé
                 return false;
             } else {
-                // Vérifie si les deux mots de passe sont les mêmes
-                // Le mot de passe que l’utilisateur a donné.
+                    // Vérifie si les deux mots de passe sont les mêmes
+                    // Le mot de passe que l’utilisateur a donné.
                 if ($db_password == $password) {
                     // Le mot de passe est correct!
                     // Récupère la chaîne user-agent de l’utilisateur
@@ -59,20 +54,16 @@ function login($email, $password, $mysqli) {
                     $user_id = preg_replace("/[^0-9]+/", "", $user_id);
                     $_SESSION['user_id'] = $user_id;
                     // Protection XSS car nous pourrions conserver cette valeur
-                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", 
-                                                                "", 
-                                                                $username);
+                    $username = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $username);
                     $_SESSION['username'] = $username;
-                    $_SESSION['login_string'] = hash('sha512', 
-                              $password . $user_browser);
+                    $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
                     // Ouverture de session réussie.
                     return true;
                 } else {
                     // Le mot de passe n’est pas correct
                     // Nous enregistrons cet essai dans la base de données
                     $now = time();
-                    $mysqli->query("INSERT INTO login_attempts(user_id, time)
-                                    VALUES ('$user_id', '$now')");
+                    $mysqli->query("INSERT INTO login_attempts(user_id, time) VALUES ('$user_id', '$now')");
                     return false;
                 }
             }

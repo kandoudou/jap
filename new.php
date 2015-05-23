@@ -12,13 +12,13 @@ $json_string = file_get_contents('https://maps.googleapis.com/maps/api/place/tex
 $parsed_json = json_decode($json_string);
 try
 {
-	$bdd = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+	$pdo = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 	
 	foreach ($parsed_json->{'results'} as $weekday){
 		echo $weekday->{'place_id'}.'<br>';
 		$myText = print_r($weekday->{'place_id'},true);
 		$query = "INSERT INTO `place`(`id`) VALUES ('$myText')";
-		$bdd->exec($query);
+		$pdo->exec($query);
 	}	
 		
 	$token = $parsed_json->{'next_page_token'};
@@ -31,7 +31,7 @@ try
 			echo $weekday1->{'place_id'}.'<br>';
 			$myText1 = print_r($weekday1->{'place_id'},true);
 			$query1 = "INSERT INTO `place`(`id`) VALUES ('$myText1')";
-			$bdd->exec($query1);
+			$pdo->exec($query1);
 			}
 		
 		$token2 = $parsed_json1->{'next_page_token'};
@@ -44,7 +44,7 @@ try
 			echo $weekday2->{'place_id'}.'<br>';
 			$myText2 = print_r($weekday2->{'place_id'},true);
 			$query2 = "INSERT INTO `place`(`id`) VALUES ('$myText2')";
-			$bdd->exec($query2);
+			$pdo->exec($query2);
 			}	
 
 		

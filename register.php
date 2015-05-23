@@ -53,6 +53,6 @@ include_once 'includes/functions.php';
                                    this.form.password,
                                    this.form.confirmpwd);" /> 
         </form>
-        <p>Retournez à la page d’<a href="index.php">inscription</a>.</p>
+        <p>Retournez à la page d’<a href="login.php">inscription</a>.</p>
     </body>
 </html>

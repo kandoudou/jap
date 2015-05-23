@@ -1,23 +1,13 @@
-<?php include ('function.php');?>
 <?php
-try
-{
-	// On se connecte à MySQL
-	$bdd = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch(Exception $e)
-{
-	// En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : '.$e->getMessage());
-}
-
+include ('includes/function.php');
+include ('includes/db.php');
 
 if($_POST["envoi"] && $_POST["address_postal_code"] !== 0 && $_POST["address_city"] !== 0 )
 	{
 		$question 	= $_POST["address_postal_code"];
 		$questions 	= $_POST["address_city"];
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query("SELECT * FROM `table 5` WHERE `address_postal_code`='$question' OR `address_city`='$questions'");
+$reponse = $bdd->query("SELECT * FROM `japonais_restaurants` WHERE `address_postal_code`='$question' OR `address_city`='$questions'");
 
 	// Execute the query (the recordset $rs contains the result)
 

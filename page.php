@@ -1,15 +1,12 @@
 <?php
-try
-{
-	// On se connecte à MySQL
-	$bdd = new PDO('mysql:host=localhost;dbname=japonais;charset=utf8', 'root', '', array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+include ('includes/db_connect.php');
+include ('includes/functions.php');
+include ('includes/db.php');
+jap_session_start();
+spl_autoload_register('autoload');
+function autoload($class){
+	require 'class/' . str_replace('\\', '/', $class) . '.php';
 }
-catch(Exception $e)
-{
-	// En cas d'erreur, on affiche un message et on arrête tout
-        die('Erreur : '.$e->getMessage());
-}
-
 // Récupère l'id de la page courante passée par l'URL
 // Si non défini, on considère que la page est la page d'accueil
 	if (isset($_GET['name'])) {
@@ -19,19 +16,20 @@ catch(Exception $e)
 	}
 
 // On récupère tout le contenu de la table jeux_video
-$reponsecount = $bdd->query("SELECT * FROM `table 5` WHERE `name_url`='$enva'");
+$reponsecount = $pdo->query("SELECT * FROM `japonais_restaurants` WHERE `name_url`='$enva'");
 
 //Permet de rediriger l'utilisateur sur la page 404 si la page n'existe pas
 if ($reponsecount->fetchColumn() == 0) {
 header('Location:http://'.$_SERVER['HTTP_HOST'].'/jap/jap/404.html');
 }
 
-$reponse = $bdd->query("SELECT * FROM `table 5` WHERE `name_url`='$enva'");
+$reponse = $pdo->query("SELECT * FROM `japonais_restaurants` WHERE `name_url`='$enva'");
 
 // On affiche lle restaurant
 while ($donnees = $reponse->fetch())
 {
 $_ENV['name'] = $donnees['name'];
+$_ENV['id'] = $donnees['id'];
 $_ENV['address_full'] = $donnees['address_full'];
 $_ENV['phone_number'] = $donnees['phone_number'];
 $_ENV['location_long'] = $donnees['location_long'];
@@ -42,8 +40,6 @@ $_ENV['location_lat'] = $donnees['location_lat'];
 $reponse->closeCursor(); // Termine le traitement de la requête
 
 
-?>
-<?php
 //(1) On inclut la classe de Google Maps pour générer ensuite la carte.
 require('GoogleMapAPI.class.php');
 
@@ -84,8 +80,73 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 				<p><?php echo $_ENV['name']; ?></p>
 				<p><?php echo $_ENV['address_full']; ?></p>
 				<p><?php echo $_ENV['phone_number']; ?></p>
-
 		</div>
-	</div>
+		<?php
+		$comments_cls = new Comments($pdo);
+		//SOUMISSION DUN COMMENTAIRE
+		$errors = false;
+		$success = false;
+		if (isset($_POST['action']) && $_POST['action'] == 'comment') {
+			$save = $comments_cls->save('japonais_restaurants', $_ENV['id']);
+			if ($save) {
+				$success = true;
+			}else{$errors = $comments_cls->errors;}
+		}
+		
+		$comments =$comments_cls->findAll('japonais_restaurants', $_ENV['id']);
+		
+		?>
+
+		<h2><?= count($comments); ?> Commentaires</h2>
+		<?php if ($errors): ?>
+		<div class="alert alert-danger">
+			<strong>Impossible de poster votre commentaire</strong> pour les raisons suivantes :
+			<ul>
+				<?php foreach ($errors as $error): ?>
+					<li><?= $error; ?></li>
+				<?php endforeach ?>
+				
+			</ul>
+		</div>
+	<?php endif ?>
+			<?php if ($success): ?>
+		<div class="alert alert-success">
+			<strong>CLAP CLAP !!!</strong> votre commentaire a bien été posté 
+		</div>
+	<?php endif ?>
+		<form action="#comment" role="form" method="post" id="comment">
+			<div class="row">
+				<div class="col-xs-6">
+
+				</div>
+				<div class="col-xs-6">
+				</div>
+				<div class="col-xs-12">
+					<div class="form-group">
+						<label>Commentaire</label>
+						<textarea class="form-control" name="content"></textarea>
+					</div>
+				</div>
+				<button type="submit" name="envoyer">Envoyer</button>
+			</div>
+			<input type="hidden" name="action" value="comment">
+		</form>
+
+		<?php foreach ($comments as $comment): ?>
+			<div class="comment row" style="border:solid 1px #DDD">
+				<div class="col-s-2">
+					<img src="http://www.gravatar.com/avatar/<?= md5($comment['email']); ?>">
+				</div>
+				<div class="col-s-10">
+				<p>
+					<strong><?= $comment['username']; ?>,</strong>
+					<em><?= date('d/m/Y', strtotime($comment['created'])); ?></em>
+				</p>
+				<p>
+					<?= $comment['content']; ?>
+				</p>
+				</div>
+			</div>
+	<?php endforeach ?>
 </body>
 </html>
