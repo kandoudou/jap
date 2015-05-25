@@ -12,6 +12,29 @@
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+        $( document ).ready(function() {
+        $("#departement").change(function() {
+        $("select#departement option:selected").each(function() {
+            if($(this).val() != 0) {
+                var request = $.ajax({
+                  url: "includes/function.php",
+                  method: "POST",
+                  data: { val_dep_ajax : $(this).val(), val_dep_function_ajax: 'moteur_de_recherche_ville' },
+                  dataType: "html"
+                });	 
+                request.done(function(msg) {
+                  $("select#ville").html(msg);
+                });
+            }
+            else {
+                $("select#ville").html("<option value='0'>Séclionnez en premier lieu un département</option>");
+            }
+        });
+        });
+        })
+        </script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
       // This example displays an address form, using the autocomplete feature
@@ -163,6 +186,7 @@
     </form>
     
     <?php include ('includes/function.php');?>
+    <?php include ('includes/form_departement.php');?>
 		<?php include('liste.php');?> 
 		
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
