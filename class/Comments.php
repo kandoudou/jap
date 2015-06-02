@@ -49,15 +49,25 @@
  			$errors['content'] = $this->options['content_error'];
  			
  		}
+ 		if (empty($_POST['note1'])) {
+ 			$errors['note1'] = $this->options['note_error'];
+ 			
+ 		}
+ 		if (empty($_POST['note2'])) {
+ 			$errors['note2'] = $this->options['note_error'];
+ 			
+ 		}
  		if (count($errors) > 0) {
  			$this->errors = $errors ;
  			return false;
  		}
- 		$q = $this->pdo->prepare('INSERT INTO japonais_comments SET user_id = :user_id, username= :username, content = :content, ref_id = :ref_id, ref = :ref, created = :created');
+ 		$q = $this->pdo->prepare('INSERT INTO japonais_comments SET user_id = :user_id, note1= :note1, note2= :note2, username= :username, content = :content, ref_id = :ref_id, ref = :ref, created = :created');
  		$data = [
 		'user_id' => $_SESSION['user_id'],
 		'username' => $_SESSION['username'],
 		'content' => $_POST['content'],
+		'note1' => $_POST['note1'],
+		'note2' =>$_POST['note2'],
 		'ref_id' => $ref_id,
 		'ref' => $ref,
 		'created' => date('Y-m-d H:i:s'),

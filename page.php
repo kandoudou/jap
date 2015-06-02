@@ -69,9 +69,20 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <!-- Insère le titre extrait de la DB dans la balise correspondante -->
 <title><?php echo $_ENV['name']; ?></title>
-<link rel="stylesheet" type="text/css" href="styles.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="http://localhost/jap/jap/js/jquery.barrating.js"></script>
+<script src="http://localhost/jap/jap/js/examples.js"></script>
+<script type="text/javascript">
+   $(function() {
+      $('#example1').barrating();
+      $('#example2').barrating();
+   });
+</script>
+<link rel="stylesheet" type="text/css" href="http://localhost/jap/jap/css/main.css">
 <?php $map->printHeaderJS(); ?>
 		<?php $map->printMapJS(); ?>
+
+
 </head>
 <body onload="onLoad();">
 <?php $map->printMap(); ?>
@@ -92,7 +103,7 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 				$success = true;
 			}else{$errors = $comments_cls->errors;}
 		}
-		
+
 		$comments =$comments_cls->findAll('japonais_restaurants', $_ENV['id']);
 		
 		?>
@@ -116,9 +127,23 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 	<?php endif ?>
 		<form action="#comment" role="form" method="post" id="comment">
 			<div class="row">
-				<div class="col-xs-6">
 
-				</div>
+				<select id="example1"  name="note1">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+				<select id="example2"  name="note2">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="4">4</option>
+					<option value="5">5</option>
+				</select>
+									
+						
 				<div class="col-xs-6">
 				</div>
 				<div class="col-xs-12">
