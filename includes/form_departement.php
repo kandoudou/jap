@@ -1,11 +1,6 @@
 <?php
 include ('db.php');
-<<<<<<< HEAD
-// On rÃ©cupÃ¨re tout le contenu de la table jeux_video
-=======
-
 // On récupère tout le contenu de la table jeux_video
->>>>>>> origin/update
 $reponse = $pdo->query('SELECT address_postal_code FROM `japonais_restaurants` ORDER BY address_postal_code ASC ');
 ?>
 <br/><br/>
@@ -13,13 +8,8 @@ $reponse = $pdo->query('SELECT address_postal_code FROM `japonais_restaurants` O
 <select id="departement" name="departement">
 
 <?php
-<<<<<<< HEAD
-// On affiche chaque entrÃ©e une Ã  une
-$donnees_departements = array(); // crÃ©ation de mon tableau dep
-=======
 // On affiche chaque entrée une à une
 $donnees_departements = array(); // création de mon tableau dep
->>>>>>> origin/update
 $donnees_departements_count = array(); // comptage nombre de ville par dep
 while ($donnees = $reponse->fetch())
 {
@@ -33,13 +23,7 @@ while ($donnees = $reponse->fetch())
 		$donnees_departements_count[] = $departement[0].$departement[1]; 
 	}
 }
-<<<<<<< HEAD
 $reponsedep = $pdo->query('SELECT departement_code,departement_nom FROM `departement` ORDER BY departement_nom ASC ');
-=======
-
-$reponsedep = $pdo->query('SELECT departement_code,departement_nom FROM `departement` ORDER BY departement_nom ASC ');
-
->>>>>>> origin/update
 $occurences = array_count_values($donnees_departements_count);
 ?>
 
@@ -63,13 +47,8 @@ while ($donneesdep = $reponsedep->fetch())
 <br/><br/>
 <input type="submit" id="button_recherche_dep" name="envoi" value="ok"/> 
 <?php
-<<<<<<< HEAD
-$reponse->closeCursor(); // Termine le traitement de la requÃªte
-$reponsedep->closeCursor(); // Termine le traitement de la requÃªte
-=======
 $reponse->closeCursor(); // Termine le traitement de la requête
 $reponsedep->closeCursor(); // Termine le traitement de la requête
->>>>>>> origin/update
 ?>
 
 </form>

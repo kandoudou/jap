@@ -11,29 +11,15 @@ include ('includes/function.php');
 include ('includes/db.php');
 ?>
 <?php
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/update
 if(isset($_POST["departement"]) && $_POST["departement"] != "" && $_POST["departement"] != 0 && isset($_POST["ville"]) && $_POST["ville"] != "" && $_POST["ville"] != 0)
 	{
 		$ville = $_POST["ville"];
 // On récupère tout le contenu de la table jeux_video
 $reponse = $pdo->query("SELECT * FROM `japonais_restaurants` WHERE `address_postal_code`='$ville'");
-<<<<<<< HEAD
 	// Execute the query (the recordset $rs contains the result)
 	// Loop the recordset $rs
 	// Each row will be made into an array ($row) using mysql_fetch_array
 	// On affiche chaque entrée une à une
-=======
-
-	// Execute the query (the recordset $rs contains the result)
-
-	// Loop the recordset $rs
-	// Each row will be made into an array ($row) using mysql_fetch_array
-	// On affiche chaque entrée une à une
-
->>>>>>> origin/update
 while ($donnees = $reponse->fetch())
 {
 ?><?php
@@ -45,18 +31,10 @@ $namerestaurant = encode($donnees['name']);
 <p><?php echo $donnees['address_full']; ?>
 <?php
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/update
 $reponse->closeCursor(); // Termine le traitement de la requête7
 		
 		
 	}	    
 ?>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> origin/update

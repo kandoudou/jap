@@ -1,10 +1,5 @@
 <?php
-
 //Liste toute les fonctions utilisées sur le site
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/update
 if(isset($_POST['val_dep_function_ajax'])) {
 $fonction = $_POST['val_dep_function_ajax'];
 unset($_POST['val_dep_function_ajax']);
@@ -40,10 +35,6 @@ function encode($chaine) {
  
     return $chaine;
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/update
 function moteur_de_recherche_ville() {
 $id = $_POST['val_dep_ajax'];
 include ('db.php');
@@ -51,14 +42,8 @@ if ($id != 75) {
 $reponse = $pdo->query("SELECT address_city,address_postal_code FROM `japonais_restaurants` WHERE address_postal_code LIKE '$id%' ORDER BY address_city ASC");
 }
 else {
-<<<<<<< HEAD
 $reponse = $pdo->query("SELECT address_city,address_postal_code FROM `japonais_restaurants` WHERE address_postal_code LIKE '$id%' ORDER BY address_postal_code ASC");   
 }
-=======
-$reponse = $pdo->query("SELECT address_city,address_postal_code FROM `japonais_restaurants` WHERE address_postal_code LIKE '$id%' ORDER BY address_postal_code ASC");	
-}
-
->>>>>>> origin/update
 $donnees_villes = array(); // création de mon tableau dep
 $donnees_villes_count = array(); // comptage nombre de ville par dep
 while ($donnees = $reponse->fetch())
@@ -66,21 +51,14 @@ while ($donnees = $reponse->fetch())
 ?>
 
 <?php 
-<<<<<<< HEAD
     $donnees_villes[$donnees["address_postal_code"]] = $donnees["address_city"]; 
     $donnees_villes_count[] = $donnees["address_postal_code"]; 
     
-=======
-	$donnees_villes[$donnees["address_postal_code"]] = $donnees["address_city"]; 
-	$donnees_villes_count[] = $donnees["address_postal_code"]; 
-	
->>>>>>> origin/update
 }
 $occurences = array_count_values($donnees_villes_count);
 foreach ($donnees_villes as $key => $value){
 ?>
 <?php 
-<<<<<<< HEAD
     if ($key >= 75000 & $key <= 75020) {
         $ville = substr($value, 0);
         $arrondissement = substr($key, -2);
@@ -99,26 +77,3 @@ foreach ($donnees_villes as $key => $value){
 }
 $reponse->closeCursor(); // Termine le traitement de la requête
 }
-=======
-
-	if ($key >= 75000 & $key <= 75020) {
-		$ville = substr($value, 0);
-		$arrondissement = substr($key, -2);
-?>
-		<option value="<?php echo $key; ?>"><?php echo $ville[0].$ville[1].$ville[2].$ville[3].$ville[4]." ".$arrondissement; ?> (<?php echo $occurences[$key];?>)</option>
-        
-<?php
-	}
-	else {
-?>	
-
-		<option value="<?php echo $key; ?>"><?php echo $value; ?> (<?php echo $occurences[$key];?>)</option>
-
-<?php
-	}
-}
-
-$reponse->closeCursor(); // Termine le traitement de la requête
-
-}
->>>>>>> origin/update
