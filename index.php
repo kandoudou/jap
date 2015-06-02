@@ -12,8 +12,13 @@
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+<<<<<<< HEAD
     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
+=======
+     <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		<script type="text/javascript">
+>>>>>>> origin/update
         $( document ).ready(function() {
         $("#departement").change(function() {
         $("select#departement option:selected").each(function() {
@@ -23,12 +28,21 @@
                   method: "POST",
                   data: { val_dep_ajax : $(this).val(), val_dep_function_ajax: 'moteur_de_recherche_ville' },
                   dataType: "html"
+<<<<<<< HEAD
                 });   
                request.done(function(msg) {
                   $("select#ville").html(msg);
                 });
             }
           else {
+=======
+                });	 
+                request.done(function(msg) {
+                  $("select#ville").html(msg);
+                });
+            }
+            else {
+>>>>>>> origin/update
                 $("select#ville").html("<option value='0'>Séclionnez en premier lieu un département</option>");
             }
         });
