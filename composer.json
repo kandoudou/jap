@@ -1,0 +1,17 @@
+{
+    "name": "jap/fbconnect",
+    "authors": [
+        {
+            "name": "jap",
+            "email": "jeremie.kandoudaeff@gmail.com"
+        }
+    ],
+    "autoload": {
+    	"psr-4": {
+    		"App\\" : "app/"
+    	}
+    },
+    "require" : {
+    	"facebook/php-sdk-v4" : "4.0.*"
+  	}
+}
