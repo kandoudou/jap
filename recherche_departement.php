@@ -119,8 +119,10 @@ foreach( $tab_ville as $index => $val ) {
 ?><?php
 
 $departement = $tab_address[$index]; 
-$ville = encode($ville); 
+$ville = encode($tab_ville[$index]); 
 $namerestaurant = $tab_name[$index];
+
+
 ?>
 
 <p><a href="http://localhost/jap/jap/restaurant/<?php echo $departement[0],$departement[1]; ?>/<?php echo $ville; ?>/<?php echo encode($namerestaurant); ?>.html"><?php echo $namerestaurant; ?></a></p>
