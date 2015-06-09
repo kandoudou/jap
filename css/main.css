@@ -281,6 +281,59 @@ textarea {
 .br-wrapper .br-widget {
   height: 30px;
 }
+.note{
+background-image: url("http://localhost/jap/jap/img/star.png");
+  height: 30px;
+  display :inline-block;
+  width: 150px;
+}
+.notes1{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 30px;
+}
+.notes15{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 45px;
+}
+.notes2{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 60px;
+}
+.notes25{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 75px;
+}
+.notes3{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 90px;
+}
+.notes35{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 105px;
+}
+.notes4{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 120px;
+}
+.notes45{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 135px;
+}
+.notes5{
+  background: url("http://localhost/jap/jap/img/star.png") 0px -30px;
+  height: 30px;
+  width: 150px;
+}
+
+}
 .br-wrapper .br-widget a {
   background-image: url("http://localhost/jap/jap/img/star.png");
   width: 30px;
@@ -294,11 +347,13 @@ textarea {
     background-size: 30px 60px;
   }
 }
+
 .br-wrapper .br-widget a:hover,
 .br-wrapper .br-widget a.br-active,
 .br-wrapper .br-widget a.br-selected {
   background-position: 0 30px;
 }
+
 .br-wrapper .br-widget .br-current-rating {
   clear: both;
   width: 330px;
@@ -372,3 +427,16 @@ textarea {
   border-top: 0;
 }
 
+.comment img {
+float: left;
+  margin-right: 14px;
+  margin-left: 6px;
+  margin-top: 6px;
+}
+.comment{
+      width: 80%;
+}
+.comment em{
+      float: right;
+  margin-right: 25px;
+}

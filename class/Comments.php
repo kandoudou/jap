@@ -26,6 +26,11 @@
 		$q->execute(['ref' => $ref,'ref_id' => $ref_id]);
 		return $q->fetchAll();
  	}
+ 	public function findLast(){
+ 		$q = $this->pdo-> prepare("SELECT * FROM japonais_comments LEFT JOIN japonais_restaurants ON japonais_comments.ref_id = japonais_restaurants.id ORDER BY created DESC LIMIT 3");
+		$q->execute();
+		return $q->fetchAll();
+ 	}
 
  	/**
  	* PERMET DE SAUVEGARGER UN COMMENTAIRE

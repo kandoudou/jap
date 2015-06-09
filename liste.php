@@ -2,7 +2,7 @@
 	include ('includes/db.php');
 
 	// On récupère tout le contenu de la table jeux_video
-	$reponse = $pdo->query('SELECT * FROM `japonais_restaurants`');
+	$reponse = $pdo->query('SELECT * FROM `japonais_restaurants` LIMIT 2');
 
 	// On affiche chaque entrée une à une
 	while ($donnees = $reponse->fetch()){ 

@@ -7,7 +7,7 @@ if($_POST["envoi"] && $_POST["address_postal_code"] !== 0 && $_POST["address_cit
 		$question 	= $_POST["address_postal_code"];
 		$questions 	= $_POST["address_city"];
 // On récupère tout le contenu de la table jeux_video
-$reponse = $bdd->query("SELECT * FROM `japonais_restaurants` WHERE `address_postal_code`='$question' OR `address_city`='$questions'");
+$reponse = $pdo->query("SELECT * FROM `japonais_restaurants` WHERE `address_city`='$questions'");
 
 	// Execute the query (the recordset $rs contains the result)
 
@@ -26,6 +26,7 @@ $namerestaurant = encode($donnees['name']);
 <p><?php echo $donnees['address_full']; ?>
 <?php
 }
+
 
 $reponse->closeCursor(); // Termine le traitement de la requête7
 		

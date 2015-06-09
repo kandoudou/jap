@@ -21,14 +21,11 @@ $(function() {
             showSelectedRating: false
         });
 
-        $('#example-e').barrating('show', {
-            wrapperClass: 'br-wrapper-e',
-            initialRating: 'A',
-            showValues: true,
+        $('.example_result').barrating({
+            wrapperClass: 'br-wrapper',
+            showValues: false,
             showSelectedRating: false,
-            onSelect:function(value, text) {
-                alert('Selected rating: ' + value);
-            }
+            readonly: true
         });
 
         $('#example1').barrating({

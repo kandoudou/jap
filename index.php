@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <script type="text/javascript">
         $( document ).ready(function() {
         $("#departement").change(function() {
@@ -187,9 +188,11 @@
     
     <?php include ('includes/function.php');?>
     <?php include ('includes/form_departement.php');?>
-		<?php include('liste.php');?> 
+		<?php include('liste.php');?>
+    <p>Derniers avis de la Communauté :</p>
+    <?php include('last_comment.php');?>
+
 		
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
