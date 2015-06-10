@@ -24,18 +24,19 @@ $(function() {
         $('.example_result').barrating({
             wrapperClass: 'br-wrapper',
             showValues: false,
-            showSelectedRating: false,
-            readonly: true
+            showSelectedRating: false
         });
 
         $('#example1').barrating({
             wrapperClass: 'br-wrapper',
-            showSelectedRating: false
+            showSelectedRating: false,
+            showValues: false
         });
 
         $('#example2').barrating('show', {
             wrapperClass: 'br-wrapper',
-            showSelectedRating: false
+            showSelectedRating: false,
+            showValues: false
         });
 
         $('#example-h').barrating('show', {

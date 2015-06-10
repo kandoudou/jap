@@ -62,23 +62,23 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<!-- Insère les mots-clés extraits de la DB dans les meta -->
-<META NAME="keywords" lang="fr" CONTENT="">
-<!-- Insère la description extraite de la DB dans les meta -->
-<META NAME="Description" CONTENT="">
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<!-- Insère le titre extrait de la DB dans la balise correspondante -->
 <title><?php echo $_ENV['name']; ?></title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500">
+    <link rel="stylesheet" href="http://localhost/jap/jap/css/normalize.css">
+    <link rel="stylesheet" href="http://localhost/jap/jap/css/main.css">
+    
+    <script src="http://localhost/jap/jap/js/vendor/modernizr-2.8.3.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+
 <script src="http://localhost/jap/jap/js/jquery.barrating.js"></script>
 <script src="http://localhost/jap/jap/js/examples.js"></script>
-<script type="text/javascript">
-   $(function() {
-      $('#example1').barrating();
-      $('#example2').barrating();
-   });
-</script>
-<link rel="stylesheet" type="text/css" href="http://localhost/jap/jap/css/main.css">
+
 <?php $map->printHeaderJS(); ?>
 		<?php $map->printMapJS(); ?>
 
@@ -165,8 +165,15 @@ $map->addMarkerByCoords( $_ENV['location_long'], $_ENV['location_lat'], $_ENV['n
 				<div class="col-s-10">
 				<p>
 					<strong><?= $comment['username']; ?>,</strong>
+					</p>
 					<em><?= date('d/m/Y', strtotime($comment['created'])); ?></em>
-				</p>
+				<?php $note_moyenne = ($comment['note1'] + $comment['note2'])/2;?>
+					<?php $notes_moyenne = str_replace(".", "", $note_moyenne); ?>
+					<div class="note">
+						<div class="notes<?= $notes_moyenne; ?>">
+							
+						</div>
+					</div>
 				<p>
 					<?= $comment['content']; ?>
 				</p>

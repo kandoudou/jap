@@ -333,7 +333,7 @@ background-image: url("http://localhost/jap/jap/img/star.png");
   width: 150px;
 }
 
-}
+
 .br-wrapper .br-widget a {
   background-image: url("http://localhost/jap/jap/img/star.png");
   width: 30px;
@@ -439,4 +439,16 @@ float: left;
 .comment em{
       float: right;
   margin-right: 25px;
+}
+
+.rank{
+      float: left;
+  text-align: center;
+  width: 80px;
+}
+
+.resultat_classement img {
+  float: left;
+  margin-right: 10px;
+  width: 100px;
 }

@@ -35,7 +35,7 @@
         });
         });
         })
-        </script>
+    </script>
 		<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places"></script>
     <script>
       // This example displays an address form, using the autocomplete feature
@@ -145,7 +145,14 @@
   <body onload="initialize()">
     <!--[if lt IE 8]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->        
+    <![endif]-->
+    <ul class="menu">
+      <li><a href="">Meilleur restaurant Japonais</a></li>
+      <li><a href="classement.php">Classement</a></li>
+      <li><a href="login.php">Se connecter</a></li>
+      <li><a href="register.php">Créer un compte</a></li>
+      <li><a href="includes/logout.php">Se déconnecter</a></li>
+    </ul>        
     <form action="recherche.php" method="post" id="moteur">
       <div id="locationField">
         <input id="autocomplete" name="question" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>

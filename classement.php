@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="css/main.css">
     
     <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
     <script type="text/javascript">
         $( document ).ready(function() {
         $("#departement").change(function() {
@@ -49,23 +50,41 @@ include ('includes/form_departement_classement.php');
 
 
 
-	$reponse = $pdo->query('SELECT japonais_restaurants.name, AVG((note1+note2)/2) AS moyenne FROM `japonais_restaurants` LEFT JOIN `japonais_comments` ON japonais_restaurants.id = japonais_comments.ref_id GROUP BY japonais_restaurants.id ORDER BY moyenne  DESC LIMIT 20');
+	$reponse = $pdo->query('SELECT japonais_restaurants.name, address_city, address_department, address_postal_code, address_postal, note1, note2, ROUND(AVG((note1+note2)/2)) AS moyenne FROM `japonais_restaurants` LEFT JOIN `japonais_comments` ON japonais_restaurants.id = japonais_comments.ref_id GROUP BY japonais_restaurants.id ORDER BY moyenne  DESC LIMIT 20');
 	$rank = 1;
 	// On affiche chaque entrée une à une
 	while ($donnees = $reponse->fetch()){ 
 
 	// retourne le code postal
 	$namerestaurant = $donnees['name'];
-	$note = $donnees['moyenne'];
+	$note_moyenne = $donnees['moyenne'];
 	$rankfinale = $rank ++;
-
+	$notes_moyenne = str_replace(".", "", $note_moyenne);
+	$departement = $donnees['address_postal_code'];
+	$ville = encode($donnees['address_city']);
+	$namerestaurant_encode = encode($donnees['name']);
 ?>
-<p>
-	<?php echo $rankfinale; ?>
-	<?php echo $donnees['name']; ?>
-	<?php echo $donnees['moyenne']; ?>
-	</a>
-</p>
+<div class="resultat_classement">
+<div class="rank">
+<?php echo $rankfinale; ?>- 
+</div>
+<img src="img/33.jpg" />
+<div>
+<a href="http://localhost/jap/jap/restaurant/
+		<?php echo $departement[0],$departement[1]; ?>/
+		<?php echo $ville; ?>/
+		<?php echo $namerestaurant_encode; ?>
+		.html"><?= $donnees['name']; ?></a>
+		<p> <?= $donnees['address_postal'];?> - <?= $donnees['address_postal_code'];?></p>
+
+<div class="note">
+<div class="notes<?= $notes_moyenne; ?>">
+
+
+</div>					
+</div>
+</div>
+</div>
 <p>
 	
 <?php
